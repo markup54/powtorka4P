@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,14 +19,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         przycisk = findViewById(R.id.button);
-        loginEditText = findViewById(R.id.editText);
-        przycisk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                odczytane = loginEditText.getText().toString();
-                Log.i("TEXT",odczytane);
-                Toast.makeText(MainActivity.this,odczytane,Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    public void przepisz(View view) {
+        EditText editTextEmail = findViewById(R.id.editTextTextEmailAddress);
+        String email = editTextEmail.getText().toString();
+        TextView textViewKomunikat = findViewById(R.id.textViewKomunikat);
+        textViewKomunikat.setText("Autor 00000000000");
+        EditText editTextPassword1 = findViewById(R.id.editTextTextPassword);
+        EditText editTextPassword2 = findViewById(R.id.editTextTextPassword2);
+        if(!email.contains("@")){
+            textViewKomunikat.setText("Nieprawidłowy adres email");
+        }
+        else{
+            String haslo1 = editTextPassword1.getText().toString();
+            String haslo2 = editTextPassword2.getText().toString();
+            if (!haslo1.equals(haslo2)){
+                textViewKomunikat.setText("Hasła się różnią");
             }
-        });
+            else{
+                textViewKomunikat.setText("Witaj "+email);
+            }
+        }
     }
 }
